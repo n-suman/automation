@@ -5,42 +5,28 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import com.bite.mobile.base.ScreenBase;
+import com.bite.mobile.utility.XBy;
 import com.relevantcodes.extentreports.LogStatus;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
-public class HomeScreen_android extends ScreenBase {
-	public HomeScreen_android(AppiumDriver<MobileElement> driver) {
+public class HomeScreen extends ScreenBase {
+	public HomeScreen(AppiumDriver<MobileElement> driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver, 60, TimeUnit.SECONDS), this);
-
 	}
-	public static By LetsStart;
-	public static By LetsStartbtn;
-	public static By allowbtn;
-	public static By allowbtn_1;
-	public static By searchlocationnametext;
-	public static By searchButton;
-	public static By springvaleoption;
-	public static By okbtn;
+	public By LetsStart = new XBy("//android.widget.Button[@content-desc=\"UITestStartButton\"]", "Let's Start button");
+	public By LetsStartbtn = new XBy("//*[@text=concat('LET', \"'\", 'S START')]", "Let's Start button");
+	public By allowbtn = new XBy("//android.widget.Button[@text='Allow']", "Allow GPS Permission");
+	public By allowbtn_1 = new XBy("com.android.packageinstaller:id/permission_allow_button", "Allow GPS Permission");
+	public By searchlocationnametext = new XBy("//android.widget.EditText[@content-desc='UITestSearchLocation']", "Location search box");
+	public By searchButton = new XBy("//android.widget.Button[@content-desc='UITestSearchButton']", "Location search button");
+	public By firstOptLocList = new XBy("//android.widget.ListView[@content-desc=\"UITestLocationsList\"]/android.widget.LinearLayout[1]/android.view.ViewGroup/android.view.ViewGroup", "First Option in Search Loc List");
+	public By okbtn = new XBy("//*[@text='OK']", "Location selection OK button");	
 
-
-	static {
-		
-		LetsStart = By.xpath("//android.widget.Button[@content-desc=\"UITestStartButton\"]");
-		LetsStartbtn = By.xpath("//*[@text=concat('LET', \\\"'\\\", 'S START')]");
-		allowbtn = By.xpath("//android.widget.Button[@text='Allow']");
-		allowbtn_1 = By.xpath("com.android.packageinstaller:id/permission_allow_button");
-		searchlocationnametext = By.xpath("//android.widget.EditText[@content-desc='UITestSearchLocation']");
-		searchButton = By.xpath("//android.widget.Button[@content-desc='UITestSearchButton']");
-        springvaleoption = By.xpath("//android.widget.ListView[@content-desc=\"UITestLocationsList\"]/android.widget.LinearLayout[1]/android.view.ViewGroup/android.view.ViewGroup");
-		okbtn = By.xpath("//*[@text='OK']");
-	}
-	
-
-	public static void selectLocation() throws InterruptedException{
+	public void selectLocation() throws InterruptedException{
 		String getText11=null;
 		try {
 			Thread.sleep(1000);
@@ -58,10 +44,6 @@ public class HomeScreen_android extends ScreenBase {
 		} catch (Exception e) {
 			test.log(LogStatus.ERROR, "To verify " + getText11 + " is clickable with in provided time ",
 					"An exception occurred waiting for " + getText11 + " to enter text" + e.getMessage());
-
 		}
 	}
-	
-	
-
 }

@@ -1,30 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Page Object Model with PageFactory">
-    <listeners>
-
-		<listener class-name="com.bite.mobile.listener.CustomListeners"></listener>
+<suite name="iOS">
+	<listeners>
+		<listener
+			class-name="com.bite.mobile.listener.CustomListeners"></listener>
 		<!-- <listener class-name="com.bite.mobile.listener.ExtentReporterNG" /> -->
 		<listener class-name="org.uncommons.reportng.HTMLReporter" />
-		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
-
-
-
+		<listener
+			class-name="org.uncommons.reportng.JUnitXMLReporter" />
 	</listeners>
-    
-    
+
 	<test thread-count="5" name="TestNGXMLTest Test" verbose="6">
 		<classes>
-			<class name="com.bite.mobile.testScripts.ios.EndToEndScript_ios" />
+			<class name="com.bite.mobile.tests.E2E" />
 		</classes>
 	</test> <!-- Test -->
-	
-	
-	<!-- <test name="Add a Tutor Test">
-		<classes>
-			<class name="testcases.careandroid.CareLoginTest" />
-		</classes>
-	</test> Test -->
-	
-	
 </suite> <!-- Suite -->

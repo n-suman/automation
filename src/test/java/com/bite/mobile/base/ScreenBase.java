@@ -1,7 +1,10 @@
 package com.bite.mobile.base;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.bite.mobile.utility.XBy;
 import com.relevantcodes.extentreports.LogStatus;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -30,15 +33,18 @@ public class ScreenBase extends TestBase {
 		driver.hideKeyboard();
 
 	}
-	
+
 	public void IsKeyBoardShown() {
 		driver.getKeyboard();
 
 	}
+	
+	public void click(XBy eleLoc) {
+		click(eleLoc.xpath(), eleLoc.description);
+	}
 
 	public void click(By elementLocator, String name) {
 		try {
-			Thread.sleep(2000);
 			WebDriverWait wait = new WebDriverWait(driver, 60);
 			wait.until(ExpectedConditions.presenceOfElementLocated(elementLocator));
 			wait.until(ExpectedConditions.elementToBeClickable(elementLocator));
@@ -47,8 +53,11 @@ public class ScreenBase extends TestBase {
 		} catch (Exception e) {
 			test.log(LogStatus.ERROR, "To verify " + name + " is clickable with in provided time ",
 					"An exception occurred waiting for " + name + " to enter text" + e.getMessage());
-
 		}
+	}
+	
+	public void Type(XBy eleLoc, String value) {
+		Type(eleLoc.xpath(), value, eleLoc.description);
 	}
 
 	public void Type(By elementLocator, String value, String name) {
@@ -59,7 +68,7 @@ public class ScreenBase extends TestBase {
 			MobileElement ele = driver.findElement(elementLocator);
 			IsKeyBoardShown();
 			ele.click();
-            hideKeyboard();
+			hideKeyboard();
 			ele.sendKeys(value);
 			test.log(LogStatus.PASS, "To Verify User able to Enter " + name, value + " Text entered successfully");
 
@@ -81,7 +90,7 @@ public class ScreenBase extends TestBase {
 
 	public void Tap(int x, int y, String name) {
 		try {
-			
+
 			(new TouchAction(driver)).tap(x, y).release().perform();
 			test.log(LogStatus.PASS, "To Verify is User able to Tap on " + name, name + " Tapped successfully");
 		} catch (Exception e) {
@@ -100,27 +109,27 @@ public class ScreenBase extends TestBase {
 
 	public static void LongPressButton(By elementLocator) throws InterruptedException {
 		Thread.sleep(2500);
-		TouchAction touchAction=new TouchAction(driver);
-		touchAction.longPress(driver.findElement(elementLocator),2500).release().perform();
-		}
-	
-	public static void LongPressWithText(MobileElement element) {
-		TouchAction touchAction=new TouchAction(driver);
-		touchAction.longPress(element,3000).release().perform();
+		TouchAction touchAction = new TouchAction(driver);
+		touchAction.longPress(driver.findElement(elementLocator), 2500).release().perform();
 	}
-	
+
+	public static void LongPressWithText(MobileElement element) {
+		TouchAction touchAction = new TouchAction(driver);
+		touchAction.longPress(element, 3000).release().perform();
+	}
+
 	public static void Press(By elementLocator) throws InterruptedException {
 		Thread.sleep(2000);
-		TouchAction touchAction=new TouchAction(driver);
+		TouchAction touchAction = new TouchAction(driver);
 		touchAction.press(driver.findElement(elementLocator)).waitAction(1500).release().perform();
-		}
-	
+	}
+
 	public static void LongPressbuttonWithCooridinates(By elementLocator, int x, int y) throws InterruptedException {
 		Thread.sleep(2000);
-		TouchAction touchAction=new TouchAction(driver);
-		touchAction.tap(driver.findElement(elementLocator),x, y).waitAction(2000).release().perform();
+		TouchAction touchAction = new TouchAction(driver);
+		touchAction.tap(driver.findElement(elementLocator), x, y).waitAction(2000).release().perform();
 	}
-	
+
 //	public boolean clicked(By locator, String locatorName) throws Throwable {
 //		boolean status = false;
 //		try {
@@ -151,5 +160,24 @@ public class ScreenBase extends TestBase {
 //		}
 //		return status;
 //	}
-
+	
+	
+	//base class definitions
+	public XBy createAnaccountlbl, emailtxt, nextbtn, guestSignIn, nextletscreateanaccountlbl, editboxes, firstnametxt;
+	public XBy lastnametxt, passwordtxt, verifypasswordtxt, termsconditionchkbox, privacypolicylink, signupbtn, Monthbtn;
+	public XBy yearbtn, genderbtn, mobilenotxt, alldonebtn, popupoptions, notnowlink;
+	public XBy LetsStart, LetsStartbtn, allowbtn, allowbtn_1, searchlocationnametext, searchButton, springvaleoption, okbtn;	
+	public XBy SigninSignupbtn, signinbtn;
+	public XBy backImageButtonFromLogout, backImageFromProfile, newstab, menustab, rewardstab, ordertab;
+	public XBy paytab, menuitems, date, item, reviewbtn;
+	
+	public void selectMenuItem(String menuType) throws InterruptedException {}
+	
+	public void selectLocation() throws InterruptedException{}
+	
+	public String RandomEmail() {
+		return null;}
+	public void selectValueFromPopUp(String value) {}
+	public void selectValueFromPopUp(String value, String name) {}
+	
 }

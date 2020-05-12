@@ -5,47 +5,31 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import com.bite.mobile.base.ScreenBase;
+import com.bite.mobile.utility.XBy;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 
-public class MenusScreen_android extends ScreenBase {
-	public MenusScreen_android(AppiumDriver<MobileElement> driver) {
+public class MenusScreen extends ScreenBase {
+	public MenusScreen(AppiumDriver<MobileElement> driver) {
 		super(driver);
 		PageFactory.initElements(new AppiumFieldDecorator(driver, 15, TimeUnit.SECONDS), this);
-
-	}
-	public static By backImageButtonFromLogout;
-	public static By backImageFromProfile;
-	public static By newstab;
-	public static By menustab;
-	public static By rewardstab;
-	public static By ordertab;
-	public static By paytab;
-	public static By menuitems;
-	public static By date;
-	public static By item;
-	public static By reviewbtn;
-
-	
-
-	static {
-		
-		backImageButtonFromLogout = By.xpath("//android.widget.ImageButton");
-		backImageFromProfile = By.xpath("//android.widget.ImageButton");
-		newstab = By.xpath("//android.widget.TextView[@text='NEWS']");
-		menustab = By.xpath("//android.widget.TextView[@text='MENUS']");
-		rewardstab = By.xpath("//android.widget.TextView[@text='REWARDS']");
-		ordertab = By.xpath("//android.widget.TextView[@text='ORDER']");
-		paytab = By.xpath("//android.widget.TextView[@text='PAY']");
-		menuitems = By.xpath("//android.widget.TextView[@text='android.widget.TextView']");
-		date = By.xpath("//android.widget.TextView[@text='Sat']");
-		item = By.xpath("//android.widget.TextView");
-		reviewbtn = By.xpath("//android.widget.Button[@text='REVIEW']");
-
 	}
 	
-	public static  void selectMenuItem(String menuType) throws InterruptedException {
+	public By backImageButton = new XBy("//android.widget.ImageButton", "Navigate Back image");
+	
+	public By newstab = new XBy("//android.widget.TextView[@text='NEWS']", "Tab: News");
+	public By menustab = new XBy("//android.widget.TextView[@text='MENUS']", "Tab: Menu");
+	public By rewardstab = new XBy("//android.widget.TextView[@text='REWARDS']", "Tab: Rewards");
+	public By ordertab = new XBy("//android.widget.TextView[@text='ORDER']", "Tab: Order");
+	public By paytab = new XBy("//android.widget.TextView[@text='PAY']", "Tab: Pay");
+	public By menuitems = new XBy("//android.widget.TextView[@text='android.widget.TextView']", "Menu Items");
+	public By date = new XBy("//android.widget.TextView[@text='Sat']", "Date selection: Saturday");
+	public By item = new XBy("//android.widget.TextView", "Item on menu");
+	public By reviewbtn = new XBy("//android.widget.Button[@text='REVIEW']", "Review button");
+	
+	public void selectMenuItem(String menuType) throws InterruptedException {
 		List<MobileElement> menuitems = driver.findElementsByXPath("//android.widget.TextView");
 		Thread.sleep(500);
 		int count = menuitems.size();
@@ -61,8 +45,4 @@ public class MenusScreen_android extends ScreenBase {
 			}
 		}
 	}
-
-	
-	
-
 }
