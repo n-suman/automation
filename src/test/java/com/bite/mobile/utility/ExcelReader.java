@@ -6,11 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
+import org.apache.poi.common.usermodel.Hyperlink;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -98,12 +101,12 @@ public class ExcelReader {
 		else if(cell.getCellType()==Cell.CELL_TYPE_NUMERIC || cell.getCellType()==Cell.CELL_TYPE_FORMULA ){
 			  
 			  String cellText  = String.valueOf(cell.getNumericCellValue());
-			  if (HSSFDateUtil.isCellDateFormatted(cell)) {
+			  if (DateUtil.isCellDateFormatted(cell)) {
 		           
 				  double d = cell.getNumericCellValue();
 
 				  Calendar cal =Calendar.getInstance();
-				  cal.setTime(HSSFDateUtil.getJavaDate(d));
+				  cal.setTime(DateUtil.getJavaDate(d));
 		            cellText =
 		             (String.valueOf(cal.get(Calendar.YEAR))).substring(2);
 		           cellText = cal.get(Calendar.DAY_OF_MONTH) + "/" +
@@ -157,12 +160,12 @@ public class ExcelReader {
 	  else if(cell.getCellType()==Cell.CELL_TYPE_NUMERIC || cell.getCellType()==Cell.CELL_TYPE_FORMULA ){
 		  
 		  String cellText  = String.valueOf(cell.getNumericCellValue());
-		  if (HSSFDateUtil.isCellDateFormatted(cell)) {
+		  if (DateUtil.isCellDateFormatted(cell)) {
 	           // format in form of M/D/YY
 			  double d = cell.getNumericCellValue();
 
 			  Calendar cal =Calendar.getInstance();
-			  cal.setTime(HSSFDateUtil.getJavaDate(d));
+			  cal.setTime(DateUtil.getJavaDate(d));
 	            cellText =
 	             (String.valueOf(cal.get(Calendar.YEAR))).substring(2);
 	           cellText = cal.get(Calendar.MONTH)+1 + "/" +
@@ -289,12 +292,12 @@ public class ExcelReader {
 	    
 	    CellStyle hlink_style = workbook.createCellStyle();
 	    XSSFFont hlink_font = workbook.createFont();
-	    hlink_font.setUnderline(XSSFFont.U_SINGLE);
+	    hlink_font.setUnderline(Font.U_SINGLE);
 	    hlink_font.setColor(IndexedColors.BLUE.getIndex());
 	    hlink_style.setFont(hlink_font);
 	    //hlink_style.setWrapText(true);
 
-	    XSSFHyperlink link = createHelper.createHyperlink(XSSFHyperlink.LINK_FILE);
+	    XSSFHyperlink link = createHelper.createHyperlink(Hyperlink.LINK_FILE);
 	    link.setAddress(url);
 	    cell.setHyperlink(link);
 	    cell.setCellStyle(hlink_style);
@@ -361,7 +364,7 @@ public class ExcelReader {
 			
 		XSSFCellStyle style = workbook.createCellStyle();
 		style.setFillForegroundColor(HSSFColor.GREY_40_PERCENT.index);
-		style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+		style.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		
 		sheet=workbook.getSheetAt(index);
 		
@@ -405,7 +408,7 @@ public class ExcelReader {
 		XSSFCellStyle style = workbook.createCellStyle();
 		style.setFillForegroundColor(HSSFColor.GREY_40_PERCENT.index);
 		XSSFCreationHelper createHelper = workbook.getCreationHelper();
-		style.setFillPattern(HSSFCellStyle.NO_FILL);
+		style.setFillPattern(CellStyle.NO_FILL);
 		
 	    
 	

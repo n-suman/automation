@@ -2,7 +2,6 @@ package com.bite.mobile.screens.ios;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 import com.bite.mobile.base.ScreenBase;
 import com.bite.mobile.utility.XBy;

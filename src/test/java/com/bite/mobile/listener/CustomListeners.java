@@ -20,19 +20,23 @@ public class CustomListeners implements ITestListener, ISuiteListener {
 	 * (non-Javadoc)
 	 * @see org.testng.ISuiteListener#onStart(org.testng.ISuite)
 	 */
+	@Override
 	public void onStart(ISuite suite) {
 		System.out.println("Starting");
 	}
 
+	@Override
 	public void onFinish(ISuite suite) {
 		System.out.println("Finishing");
 	}
 
+	@Override
 	public void onTestSuccess(ITestResult result) {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public void onTestFailure(ITestResult result) {
 
 		System.out.println("Screenshot Captured");
@@ -50,28 +54,33 @@ public class CustomListeners implements ITestListener, ISuiteListener {
 	        
 	}
 
+	@Override
 	public void onTestSkipped(ITestResult result) {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public void onTestFailedButWithinSuccessPercentage(ITestResult result) {
 		// TODO Auto-generated method stub
 
 	}
 
+	@Override
 	public void onStart(ITestContext context) {
 
 		System.out.println("Starting the test suite");
 
 	}
 
+	@Override
 	public void onFinish(ITestContext context) {
 
 		System.out.println("Ending the test suite");
 
 	}
 
+	@Override
 	public void onTestStart(ITestResult result) {
 		// TODO Auto-generated method stub
 

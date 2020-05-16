@@ -15,16 +15,30 @@ public class XBy extends By {
 	}
 	
 	public String description;
-	public String xpathExpression;
+	public String locExpression;
+	private Boolean locExpIsNotXpath = false;
+	
 	public XBy(String xpath, String desc) {
-		this.xpathExpression = xpath;
+		this.locExpression = xpath;
+		this.description = desc;
+	}
+	
+	//default is ID
+	public XBy(String id, String desc, String locByType) {
+		this.locExpIsNotXpath = true;
+		this.locExpression = id;
 		this.description = desc;
 	}
 	
 	public By xpath() {
-		return xpath(this.xpathExpression);
+		return xpath(this.locExpression);
 	}
 	
-	
+	public By id() {
+		if (this.locExpIsNotXpath)
+			return id(this.locExpression);
+		else
+			return xpath(this.locExpression);
+	}
 
 }
